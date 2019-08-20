@@ -45,13 +45,13 @@ main {
 
 .main-space {
 	overflow: auto;
-	height: 63.5vh;
+	height: 66.5vh;
 	overflow-y: scroll !important;
 	/*overflow-x:  hidden !important;*/
 }
 
 .tool-bar {
-	height: 29.5vh;
+	height: 27vh;
 }
 
 .break {

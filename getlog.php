@@ -14,7 +14,8 @@ if(!empty($_POST)){
 		$myId = 0;
 		foreach ($ids as $id) {
 			$category = R::load('transitions', (int)$id);
-			$transitions[] = [
+			$transition = [
+				'id' => $category->id,
 				'date' => $category->date,
 				'time' => $category->time,
 				'car' => $category->car, 
@@ -22,6 +23,9 @@ if(!empty($_POST)){
 				'price' => $category->price, 
 				'created' => $category->created
 			];
+			// if($transition->date != null) {
+				$transitions[] = $transition;
+			// }
 			if($myId++ == 9) break;
 		}
 

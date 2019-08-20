@@ -203,17 +203,23 @@ var saveCount = function (event) {
 var showModal = function (data) {
 	var table = $('#modal-transitions');
 	table.empty();
+	var transition = '';
 	if(data != null) {
 		for (var i = 0; i < data.length; i++) {
-			var row = $('<tr/>', {'text': ''});
-			row.append('<td>' + data[i]['created'] + '</td>');
-			row.append('<td>' + data[i]['date'] + '</td>');
-			row.append('<td>' + data[i]['time'] + '</td>');
-			row.append('<td>' + data[i]['car'] + '</td>');
-			row.append('<td>' + data[i]['price'] + '</td>');
-			row.append('<td><a href="' + data[i]['link'] + '" target="_blank">Ссылка</a></td>');
-			table.append(row);
+			if(data[i]['date'] != null) {
+				var row = $('<tr/>', {'text': ''});
+				row.append('<td>' + data[i]['created'] + '</td>');
+				row.append('<td>' + data[i]['date'] + '</td>');
+				row.append('<td>' + data[i]['time'] + '</td>');
+				row.append('<td>' + data[i]['car'] + '</td>');
+				row.append('<td>' + data[i]['price'] + '</td>');
+				row.append('<td><a href="' + data[i]['link'] + '" target="_blank">Ссылка</a></td>');
+				table.append(row);
+				transition += data[i]['id'] + 'a';
+			}
 		}
+		localStorage.removeItem("ids");
+		localStorage.setItem("ids", transition);
 		$('#exampleModal').modal('show');
 	} else {
 		alert('История пуста!');
