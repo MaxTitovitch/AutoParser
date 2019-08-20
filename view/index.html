@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Парсер авто</title>
+
+   <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="shortcut icon" href="./public/images/icon.png" type="images/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Yeseva+One&display=swap" rel="stylesheet">
+    <link href="./public/style.css?some=12" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Tinos:700&display=swap" rel="stylesheet">
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="./public/script.js?some=9"></script>
+</head>
+<body>
+<!--   <header>
+    <h1 class="display-3 text-center text-primary">Парсер авто-объявлений!</h1>
+  </header> -->
+  <main>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3">
+          <h1 class="text-primary" style="margin-top: 0px; margin-bottom: 0px; margin-left: 10px;">
+            <a class="text-primary" href="/">ПАРСЕР АВТО</a>
+          </h1>
+        </div>
+        <div class="col-md-8">
+        </div>
+        <div class="col-md-1" style="text-align: center;"> 
+          <h1 style="margin: 0px; display: inline-block;">
+            <a href="#" id="hide-menu"><span class="glyphicon glyphicon-align-justify"></span></a>
+          </h1>
+        </div>
+      </div> 
+      <div class="row row-line">
+      </div> 
+    </div>
+    <div class="container-fluid tool-bar">
+      <div class="row">
+        <div class="col-md-6">
+          <button id="plus-mach" type="button" class="btn btn-link btn-lg">Масштаб +</button>
+          <button id="minus-mach" type="button" class="btn btn-link btn-lg">Масштаб -</button>
+          <button id="add-sing" type="button" class="btn btn-link btn-lg">Отключить звук</button>
+        </div>
+        <div class="col-md-6 right-align">
+          <a href="/view/filter.html" class="btn btn-link btn-lg">Фильтры</a>
+          <button id="view-transition" type="button" class="btn btn-link btn-lg">Переходы</button>
+          <button id="reload-data" type="button" class="btn btn-link btn-lg">Обновить сейтчас</button>
+          <button id="save-count" type="button" class="btn btn-link btn-lg">Сохранить все изменения</button>
+          <button id="clear-all" type="button" class="btn btn-link btn-lg">Очистить всё</button>
+        </div>
+      </div>
+      <div class="row row-form">
+        <div class="col-md-6 my-form">
+          <label for="number">Курс:</label>
+          <input type="number" id="number" value="25" min="1" placeholder="Курс"> 
+
+          <input type="radio" id="radio1" value="1" class="radio-curs" name="radio" checked="true"> 
+          <label for="radio1" class="form-check-label">Исходный</label> 
+
+          <input type="radio" id="radio2" value="2" class="radio-curs" name="radio"> 
+          <label for="radio2" class="form-check-label">Доллар</label> 
+
+          <input type="radio" id="radio3" value="3" class="radio-curs" name="radio"> 
+          <label for="radio3" class="form-check-label">Гривна</label> 
+        </div>
+        <div class="col-md-6 right-align">
+          <input type="number" id="count" min="1" max="10000" value="{{ quantity }}" placeholder="Кол-во записей"> 
+          <label for="count" style="margin-right: 5px;">Кол-во записей парсинга:</label>
+        </div>
+      </div>
+      <div class="row row-line">
+      </div>
+
+      <div class="row row-form">
+        <div class="col-md-1">
+          <label for="olx-link" style="margin-right: 5px;">ССЫЛКИ: </label>
+        </div>
+        <div class="col-md-11">
+          <textarea id="olx-link" class="parsing-link" rows="5" type="text" placeholder="Откуда парсить все данные" >{{{ links }}}</textarea>
+        </div>
+
+<!--       <div class="row row-form">
+        <div class="col-md-1">
+          <label for="olx-link" style="margin-right: 5px;">OLX.UA: </label>
+        </div>
+        <div class="col-md-11">
+          <input id="olx-link" class="parsing-link" type="text" placeholder="Откуда парсить OLX.UA" value="{{{ olxlink }}}"> 
+        </div>
+      </div>
+
+      <div class="row row-form">
+        <div class="col-md-1">
+          <label for="outoria-link" style="margin-right: 5px;">AUTO.RIA.UA: </label>
+        </div>
+        <div class="col-md-11">
+          <input id="outoria-link" class="parsing-link" type="text" placeholder="Откуда парсить AUTO.RIA.UA" value="{{{ autorialink }}}"> 
+        </div>
+      </div>
+
+      <div class="row row-form">
+        <div class="col-md-1">
+          <label for="rst-link" style="margin-right: 5px;">RST.COM: </label>
+        </div>
+        <div class="col-md-11">
+          <input id="rst-link" class="parsing-link" type="text" placeholder="Откуда парсить RST.COM" value="{{{ rstlink }}}"> 
+        </div> -->
+      </div>
+
+      <div class="row row-line">
+      </div>
+
+    </div>      
+    <div class="container-fluid main-space">
+      <div class="row">
+        <div class="col-12 col-sm-12 col-md-2 col-lg-2 photo-col">
+          <p class="text-center"><strong>Фото</strong></p>
+        </div>
+        <div class="col-12 col-sm-12 col-md-1 col-lg-1">
+          <p class="text-center"><strong>Дата\Время</strong></p>
+        </div>
+        <div class="col-12 col-sm-12 col-md-1 col-lg-1">
+          <p class="text-center"><strong>Марка</strong></p>
+        </div>
+        <div class="col-12 col-sm-12 col-md-2 col-lg-2 text-col">
+          <p class="text-center"><strong>Описание</strong></p>
+        </div>
+        <div class="col-12 col-sm-12 col-md-1 col-lg-1">
+          <p class="text-center"><strong>Стоимость</strong></p>
+        </div>
+        <div class="col-12 col-sm-12 col-md-1 col-lg-1">
+          <p class="text-center"><strong>Кузов</strong></p>
+        </div>
+        <div class="col-12 col-sm-12 col-md-1 col-lg-1">
+          <p class="text-center"><strong>Пробег, км</strong></p>
+        </div>
+        <div class="col-12 col-sm-12 col-md-1 col-lg-1 address-col">
+          <p class="text-center"><strong>Адрес</strong></p>
+        </div>
+        <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+          <p class="text-center"><strong>Ссылка</strong></p>
+        </div>
+      </div>
+      {{#autos}}
+      <div class="row my-row">
+        <div class="col-12 col-sm-12 col-md-2 col-lg-2 photo-col">
+          <img class="image rounded mx-auto d-block" src="{{ autoPhoto }}" alt="Фото авто" data-toggle="tooltip" data-placement="bottom" title="Фото авто" onerror="changePhoto(this)">
+        </div>
+        <div class="col-12 col-sm-12 col-md-1 col-lg-1">
+          <p class="text-center car-date" data-toggle="tooltip" data-placement="bottom" title="Дата публикации"><strong>{{ publicationDate }}</strong></p>
+          <p class="text-center car-time" data-toggle="tooltip" data-placement="bottom" title="Время публикации">({{ publicationTime }})</p>
+        </div>
+        <div class="col-12 col-sm-12 col-md-1 col-lg-1">
+          <img class="image-mark rounded mx-auto d-block" alt="{{ carMake }}" src="./public/images/marks/{{ carMake }}.png" data-toggle="tooltip" data-placement="bottom" title="{{ carMake }}" onerror="changePhoto(this)">
+        </div>
+        <div class="col-12 col-sm-12 col-md-2 col-lg-2 text-col" >
+          <p class="text-center">
+            <a class="text-center auto-link" href="{{ link }}" target="_blank">
+              <strong data-toggle="tooltip" data-placement="bottom" title="Название">
+                <big>
+                  {{ carMake }} {{ car }} 
+                </big>
+              </strong>
+              <big data-toggle="tooltip" data-placement="bottom" title="Год выпуска">({{ yearOfIssue }} года)</big>
+            </a>
+          </p>
+          <p class="text-center" data-toggle="tooltip" data-placement="bottom" title="Двигатель, КПП">({{ engineCapacity }})</p>
+        </div>
+        <div class="col-12 col-sm-12 col-md-1 col-lg-1">
+          <p class="text-center" data-toggle="tooltip" data-placement="bottom" title="Стоимость"><strong data-price="{{ price }}" class="price">{{ price }}</strong></p>
+        </div>
+        <div class="col-12 col-sm-12 col-md-1 col-lg-1">
+          <img class="image-type rounded mx-auto d-block text-center" alt="{{ autoType }}" src="./public/images/types/{{ autoType }}.png" data-toggle="tooltip" data-placement="bottom" title="{{ autoType }}" onerror="changePhoto(this)">
+          <div data-toggle="tooltip" data-placement="bottom" title="{{ colorHex }}" class="color-hex" style=" margin: auto; width: 20px; height: 20px; border: 1px solid #aaaaaa; border-radius: 3px;background-color: {{ colorHex}}"></div>
+        </div>
+        <div class="col-12 col-sm-12 col-md-1 col-lg-1">
+          <p class="text-center" data-toggle="tooltip" data-placement="bottom" title="Пробег"><strong>{{ mileage }}</strong></p>
+        </div>
+        <div class="col-12 col-sm-12 col-md-1 col-lg-1 address-col">
+          <p class="text-center" data-toggle="tooltip" data-placement="bottom" title="Адрес"><strong><small class="break">{{ address }}</small></strong></p>
+        </div>
+        <div class="col-12 col-sm-12 col-md-2 col-lg-2">
+          <p class="text-center" data-toggle="tooltip" data-placement="bottom" title="Ссылка">
+            <a class="break" href="{{ link }}">{{ link }}</a>
+          </p>
+        </div>
+      </div>
+      {{/autos}}
+    </div>
+  </main>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Переходы</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Дата перехода</th>
+            <th scope="col">Дата</th>
+            <th scope="col">Время</th>
+            <th scope="col">Название</th>
+            <th scope="col">Цена</th>
+            <th scope="col">Ссылка</th>
+          </tr>
+        </thead>
+        <tbody id='modal-transitions'>
+        </tbody>
+      </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Закрыть</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

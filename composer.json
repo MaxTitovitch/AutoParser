@@ -1,0 +1,16 @@
+{
+    "name": "max/avtoparser",
+    "description": "Porsing avto from web",
+    "type": "project",
+    "require": {
+        "sunra/php-simple-html-dom-parser": "^1.5",
+        "ext-curl": "*",
+        "mustache/mustache": "^2.12"
+    },
+    "authors": [
+        {
+            "name": "Maxim Titovitch",
+            "email": "maxtitovitch@mail.ru"
+        }
+    ]
+}

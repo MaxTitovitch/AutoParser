@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Парсер авто</title>
+
+	 <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="shortcut icon" href="../public/images/icon.png" type="images/x-icon">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Yeseva+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Tinos:700&display=swap" rel="stylesheet">
+    <!-- <link href="../public/style.css?some=3" rel="stylesheet"> -->
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="../public/filter.js?some=3"></script>
+</head>
+<body>
+	<style type="text/css">
+    body {
+      font-family: 'Tinos', serif;
+    }
+
+		.row {
+			border-top: 1px solid #999999;
+			border-bottom: 1px solid #999999;
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+
+    .form-check label:hover, .col-md-3 label:hover {
+      color: #007bff;
+    }
+	</style>
+<!-- 	<header>
+		<h1 class="display-3 text-center text-primary">Парсер авто-объявлений!</h1>
+	</header> -->
+	<main>
+		<div class="container-fluid tool-bar">
+      <div class="row">
+        <h1 class="text-primary" style="margin-top: 0px; margin-bottom: 0px; margin-left: 10px;">
+          <a class="text-primary" href="/">ПАРСЕР АВТО</a>
+        </h1>
+      </div>
+			<div id='from' class="row">
+				<div class="col-md-12">
+					<label ><strong>Источник: </strong></label>
+				</div>
+        <div class="col-md-3">
+					<div class="form-check form-check-inline">
+						<input type="checkbox" class="form-check-input" id="from1">
+						<label class="form-check-label" for="from1"> olx.ua</label>
+					</div>
+				</div>
+        <div class="col-md-3">
+					<div class="form-check form-check-inline">
+						<input type="checkbox" class="form-check-input" id="from2">
+						<label class="form-check-label" for="from2"> auto.ria.com</label>
+					</div>
+				</div>
+        <div class="col-md-3">
+					<div class="form-check form-check-inline">
+						<input type="checkbox" class="form-check-input" id="from3">
+						<label class="form-check-label" for="from3"> rst.ua</label>
+					</div>
+				</div>
+			</div>
+
+			<div id='region' class="row">
+				<div class="col-md-12">
+					<label ><strong>Область: </strong></label>
+				</div>
+
+        <div class="col-md-3">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" id="region1">
+            <label class="form-check-label" for="region1"> Волынская</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" id="region2">
+            <label class="form-check-label" for="region2"> Закарпатская</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" id="region3">
+            <label class="form-check-label" for="region3"> Ивано-Франковская</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" id="region4">
+            <label class="form-check-label" for="region4"> Львовская</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" id="region5">
+            <label class="form-check-label" for="region5"> Ровенская</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" id="region6">
+            <label class="form-check-label" for="region6"> Тернопольская</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" id="region7">
+            <label class="form-check-label" for="region7"> Хмельницкая</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" id="region8">
+            <label class="form-check-label" for="region8"> Черновицкая</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" id="region9">
+            <label class="form-check-label" for="region9"> Винницкая</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" id="region10">
+            <label class="form-check-label" for="region10"> Житомирская</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" id="region11">
+            <label class="form-check-label" for="region11"> Киевская</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" id="region12">
+            <label class="form-check-label" for="region12"> Кировоградская</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" id="region13">
+            <label class="form-check-label" for="region13"> Полтавская</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" id="region14">
+            <label class="form-check-label" for="region14"> Сумская</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" id="region15">
+            <label class="form-check-label" for="region15"> Черкасская</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" id="region16">
+            <label class="form-check-label" for="region16"> Черниговская</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" id="region17">
+            <label class="form-check-label" for="region17"> Днепропетровская</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" id="region18">
+            <label class="form-check-label" for="region18"> Донецкая</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" id="region19">
+            <label class="form-check-label" for="region19"> Запорожская</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" id="region20">
+            <label class="form-check-label" for="region20"> Луганская</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" id="region21">
+            <label class="form-check-label" for="region21"> Харьковская</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" id="region22">
+            <label class="form-check-label" for="region22"> Крым</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" id="region23">
+            <label class="form-check-label" for="region23"> Николаевская</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" id="region24">
+            <label class="form-check-label" for="region24"> Одесская</label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check form-check-inline">
+            <input type="checkbox" class="form-check-input" id="region25">
+            <label class="form-check-label" for="region25"> Херсонская</label>
+          </div>
+        </div>
+			</div>
+			<div id='mark' class="row">
+
+				<div class="col-md-12">
+					<label><strong>Марка: </strong></label>
+				</div>
+        <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark1">
+              <label class="form-check-label" for="mark1"> Acura</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark2">
+              <label class="form-check-label" for="mark2"> Alfa Romeo</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark3">
+              <label class="form-check-label" for="mark3"> Aston Martin</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark4">
+              <label class="form-check-label" for="mark4"> Audi</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark5">
+              <label class="form-check-label" for="mark5"> BMW</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark6">
+              <label class="form-check-label" for="mark6"> Cadilac</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark7">
+              <label class="form-check-label" for="mark7"> Chevrolet</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark8">
+              <label class="form-check-label" for="mark8"> Citroen</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark9">
+              <label class="form-check-label" for="mark9"> Datsun</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark10">
+              <label class="form-check-label" for="mark10"> Dodge</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark11">
+              <label class="form-check-label" for="mark11"> Ferrari</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark12">
+              <label class="form-check-label" for="mark12"> Fiat</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark13">
+              <label class="form-check-label" for="mark13"> Ford</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark14">
+              <label class="form-check-label" for="mark14"> Geely</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark15">
+              <label class="form-check-label" for="mark15"> Honda</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark16">
+              <label class="form-check-label" for="mark16"> Hyundai</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark17">
+              <label class="form-check-label" for="mark17"> Jaguar</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark18">
+              <label class="form-check-label" for="mark18"> Jeep</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark19">
+              <label class="form-check-label" for="mark19"> Kia</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark20">
+              <label class="form-check-label" for="mark20"> Lada</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark21">
+              <label class="form-check-label" for="mark21"> Lamborgini</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark22">
+              <label class="form-check-label" for="mark22"> Land Rover</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark23">
+              <label class="form-check-label" for="mark23"> Lexus</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark24">
+              <label class="form-check-label" for="mark24"> Luxgen</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark25">
+              <label class="form-check-label" for="mark25"> Marussia</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark26">
+              <label class="form-check-label" for="mark26"> Maserati</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark27">
+              <label class="form-check-label" for="mark27"> Mazda</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark28">
+              <label class="form-check-label" for="mark28"> Mercedes-Benz</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark29">
+              <label class="form-check-label" for="mark29"> Mini</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark30">
+              <label class="form-check-label" for="mark30"> Mitsubishi</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark31">
+              <label class="form-check-label" for="mark31"> Nissan</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark32">
+              <label class="form-check-label" for="mark32"> Opel</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark33">
+              <label class="form-check-label" for="mark33"> Peugeot</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark34">
+              <label class="form-check-label" for="mark34"> Porsche</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark35">
+              <label class="form-check-label" for="mark35"> Renault</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark36">
+              <label class="form-check-label" for="mark36"> Rolls-Royce</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark37">
+              <label class="form-check-label" for="mark37"> Seat</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark38">
+              <label class="form-check-label" for="mark38"> Skoda</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark39">
+              <label class="form-check-label" for="mark39"> Ssang Yong</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark40">
+              <label class="form-check-label" for="mark40"> Subaru</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark41">
+              <label class="form-check-label" for="mark41"> Suzuki</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark42">
+              <label class="form-check-label" for="mark42"> Tesla</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark43">
+              <label class="form-check-label" for="mark43"> Toyota</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark44">
+              <label class="form-check-label" for="mark44"> Volkswagen</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark45">
+              <label class="form-check-label" for="mark45"> Volvo</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark46">
+              <label class="form-check-label" for="mark46"> АвтоВаз</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark48">
+              <label class="form-check-label" for="mark48"> Ваз</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark49">
+              <label class="form-check-label" for="mark49"> Волга</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark50">
+              <label class="form-check-label" for="mark50"> Вольво</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark51">
+              <label class="form-check-label" for="mark51"> Газ</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark52">
+              <label class="form-check-label" for="mark52"> Сhery</label>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="form-check-input" id="mark53">
+              <label class="form-check-label" for="mark53"> ТагаАЗ</label>
+            </div>
+          </div>
+  
+			</div>
+
+
+			<div id='year' class="row">
+				<div class="col-md-3">
+					<label><strong>Год выпуска: </strong></label>
+				</div>
+
+				<div class="col-md-3">
+					<label for="fromYear">От: </label>
+					<input type="number" id="fromYear" value="" min="1900" max="2030" placeholder="Год: от">
+				</div>
+
+				<div class="col-md-3">
+					<label for="toYear">До: </label>
+					<input type="number" id="toYear" value="" min="1900" max="2030" placeholder="Год: до">
+				</div>
+			</div>
+
+			<div id='mileage' class="row">
+				<div class="col-md-3">
+					<label><strong>Пробег: </strong></label>
+				</div>
+
+				<div class="col-md-3">
+					<label for="fromMileage">От: </label>
+					<input type="number" id="fromMileage" value="" min="0" max="10000000" placeholder="Пробег: от">
+				</div>
+				
+				<div class="col-md-3">
+					<label for="toMileage">До: </label>
+					<input type="number" id="toMileage" value="" min="0" max="10000000" placeholder="Пробег: до">
+				</div>
+			</div>
+
+			<div id='price' class="row">
+				<div class="col-md-3">
+					<label><strong>Цена, грн: </strong></label>
+				</div>
+
+				<div class="col-md-3">
+					<label for="fromPrice">От: </label>
+					<input type="number" id="fromPrice" value="" min="0" max="1000000" placeholder="Цена: от">
+				</div>
+				
+				<div class="col-md-3">
+					<label for="toPrice">До: </label>
+					<input type="number" id="toPrice" value="" min="0" max="1000000" placeholder="Цена: до">
+				</div>
+			</div>
+
+			<div id='kpp' class="row">
+				<div class="col-md-12">
+					<label><strong>КПП: </strong></label>
+				</div>
+        <div class="col-md-3">
+					<div class="form-check form-check-inline">
+						<input type="checkbox" class="form-check-input" id="kpp1">
+						<label class="form-check-label" for="kpp1"> Автоматическая</label>
+					</div>
+				</div>
+        <div class="col-md-3">
+					<div class="form-check form-check-inline">
+						<input type="checkbox" class="form-check-input" id="kpp2">
+						<label class="form-check-label" for="kpp2"> Механическая</label>
+					</div>
+				</div>
+        <div class="col-md-3">
+					<div class="form-check form-check-inline">
+						<input type="checkbox" class="form-check-input" id="kpp3">
+						<label class="form-check-label" for="kpp3"> Вариатор</label>
+					</div>
+				</div>
+        <div class="col-md-3">
+					<div class="form-check form-check-inline">
+						<input type="checkbox" class="form-check-input" id="kpp4">
+						<label class="form-check-label" for="kpp4"> Адаптивная</label>
+					</div>
+				</div>
+        <div class="col-md-3">
+					<div class="form-check form-check-inline">
+						<input type="checkbox" class="form-check-input" id="kpp5">
+						<label class="form-check-label" for="kpp5"> Типтроник</label>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<button id="get-find" class="form-control btn btn-primary btn-lg">Получить</button>
+				</div>	
+			</div>
+		</div>
+	</main>
+</body>
+</html>
